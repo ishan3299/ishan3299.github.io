@@ -1,0 +1,654 @@
+Linear Search
+int a[20], i, n, key, flag = 0, pos;
+	printf("Enter value of n : ");
+	scanf("%d", &n);
+	for (i=0;i<n;i++ ) { //Complete the code in for
+		printf("Enter element for a[%d] : ", i);
+		scanf("%d", &a[i]);
+	}
+	printf("Enter key element : ");
+	scanf("%d", &key);
+	for (i=0;i<n;i++ ) { //Complete the code in for
+		if (a[i]==key ) { //Write the condition part
+			flag = flag+1; // Complete the statement
+			pos = i; // Complete the statement
+			break;
+		}
+	}
+	if (flag==1) { //Write the condition part
+		printf("The key element %d is found at the position %d\n", key, pos);
+	} else {
+		printf("The Key element %d is not found in the array\n", key);
+	}
+}
+
+
+Binary Search
+#include<stdio.h>
+void main() {
+	int a[20], i, j, n, key, flag = 0, low, high, mid, temp;
+	printf("Enter value of n : ");
+	scanf("%d", &n);
+	for (i=0;i<n;i++ ) { // Complete the code in for
+		printf("Enter element for a[%d] : ", i);
+		scanf("%d", &a[i]); // Complete the statement
+	}
+	printf("Enter key element : ");
+	scanf("%d", &key);
+	// Bubble sort process
+	for (i=0;i<n;i++ ) { // Complete the code in for
+		for (j=0;j<i;j++ ) { // Complete the code in for
+			if (a[j]>a[i] ) { // Write the condition part
+				temp = a[i]; // Complete the statement
+				a[i] = a[j]; // Complete the statement
+				a[j] = temp; // Complete the statement
+			}
+		}
+	}
+	printf("After sorting the elements in the array are\n");
+	for(i=0;i<n;i++ ) { // Complete the code in for
+		printf("Value of a[%d] = %d\n", i, a[i]);
+	}
+	low = 0; // Complete the statement
+	high = n-1; // Complete the statement
+	while (low<=high ) { // Complete the condition part in while
+		mid = (low+high)/2; // Complete the statement
+		if (a[mid]==key ) { // Write the condition part
+			flag = flag+1; // Complete the statement
+			break;
+		} else if (a[mid]<key ) { // Write the condition part
+			low = mid+1; // Complete the statement
+		} else if (a[mid]>key ) { // Write the condition part
+			high = mid-1; // Complete the statement
+		}
+	}
+	if (flag==1 ) { // Write the condition part
+		printf("The key element %d is found at the position %d\n", key, mid);
+	} else {
+		printf("The Key element %d is not found in the array\n", key);
+	}
+}
+
+
+Heapsort
+void display(int arr[15],int n){	
+	for(int i=0;i<n;i++)	
+	{		
+		printf("%d ",arr[i]);	
+		
+	}	
+	printf("\n");
+	
+}
+void heapify(int arr[],int n,int i){	
+	int largest=i;	
+	int l=i*2+1;	
+	int r=i*2+2;	
+	if(l<n && arr[l]>arr[largest]) {		
+		largest=l;			
+		
+	}	
+	if(r<n && arr[r]>arr[largest])  {		
+		largest=r;			
+			
+	}	
+	if(largest!=i){		
+		int temp=arr[i];		
+		arr[i]=arr[largest];		
+		arr[largest]=temp;		
+		heapify(arr,n,largest);	
+		
+	}
+	
+}
+void heapsort(int arr[],int n){	
+	int i;	
+	for(i=n/2-1;i>=0;i--){		
+		heapify(arr,n,i);					
+		
+	}		
+	for(i=n-1;i>0;i--){			
+		int temp=arr[0];			
+		arr[0]=arr[i];			
+		arr[i]=temp;			
+		heapify(arr,i,0);		
+		
+	}	
+	
+}
+
+Merge Sort
+void display(int arr[15],int n){	
+	for(int i=0;i<n;i++)	
+	{		
+		printf("%d ",arr[i]);	
+		
+	}	
+	printf("\n");
+	
+}
+void heapify(int arr[],int n,int i){	
+	int largest=i;	
+	int l=i*2+1;	
+	int r=i*2+2;	
+	if(l<n && arr[l]>arr[largest]) {		
+		largest=l;			
+		
+	}	
+	if(r<n && arr[r]>arr[largest])  {		
+		largest=r;			
+			
+	}	
+	if(largest!=i){		
+		int temp=arr[i];		
+		arr[i]=arr[largest];		
+		arr[largest]=temp;		
+		heapify(arr,n,largest);	
+		
+	}
+	
+}
+void heapsort(int arr[],int n){	
+	int i;	
+	for(i=n/2-1;i>=0;i--){		
+		heapify(arr,n,i);					
+		
+	}		
+	for(i=n-1;i>0;i--){			
+		int temp=arr[0];			
+		arr[0]=arr[i];			
+		arr[i]=temp;			
+		heapify(arr,i,0);		
+		
+	}	
+	
+}
+
+Selection Sort
+#include<stdio.h>
+void main() {
+	int a[20], i, n, j, large, index;
+	printf("Enter value of n : ");
+	scanf("%d", &n);
+	// Write the code to read an array elements
+	for(i=0;i<n;i++){		
+		printf("Enter element for a[%d] : ",i);		
+		scanf("%d",&a[i]);	
+		
+	}
+	
+	printf("Before sorting the elements in the array are\n");
+	// Write the code to print the given array elements before sorting
+	for(int i=0;i<n;i++)	
+	{		
+		printf("Value of a[%d] = %d\n",i,a[i]);	
+		
+	}
+	
+	// Write the code for selection sort largest element method
+	for(int i=n-1;i>=1;i--){		
+		large=a[i];		
+		index=i;		
+		for(int j=i;j>=0;j--){			
+			if(a[j]>a[index]){				
+				large=a[j];				
+				index=j;			
+				
+			}		
+			
+		}		
+		a[index]=a[i];		
+		a[i]=large;	
+		
+	}
+	printf("After sorting the elements in the array are\n");
+	// Write the code to print the given array elements after sorting
+	for(int i=0;i<n;i++){		
+		printf("Value of a[%d] = %d\n",i,a[i]);	
+		
+	}	
+	
+}
+
+Insertion Sort
+#include<stdio.h>
+void main() {
+	int a[20], i, n, j, temp;
+	printf("Enter value of n : ");
+	scanf("%d", &n);
+	// Write the for loop to read array elements
+	for(int i=0;i<n;i++)	
+	{		
+		printf("Enter element for a[%d] : ",i);		
+		scanf("%d",&a[i]);	
+		
+	}
+	
+	printf("Before sorting the elements in the array are\n");
+	// Write the for loop to display array elements before sorting
+	for(int i=0;i<n;i++)	
+	{		
+		printf("Value of a[%d] = %d\n",i,a[i]);	
+		
+	}
+	//Write the code to sort elements
+	for(int i=0;i<n;i++)	
+	{		
+		temp=a[i];		
+		for(int j=i;j>0;j--)		
+		{			
+			if(a[j-1]>temp)			
+			{				
+				a[j]=a[j-1];				
+				a[j-1]=temp;							
+				
+			}		
+			
+		}	
+		
+	}
+	printf("After sorting the elements in the array are\n");
+	// Write the for loop to display array elements after sorting
+	for(i=0;i<n;i++)	
+	{		
+		printf("Value of a[%d] = %d\n",i,a[i]);	
+		
+	}	
+	
+}
+
+Quick Sort
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+Bubble Sort
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+Shell Sort
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+Knapsack
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+Kruskal
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+Prims
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+N-queens/Backtrack
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+Dijkstra
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+}
+
+Warshall
+void display(int arr[15], int n) {	
+	int i;	
+	for(int i=0;i<n;i++)	
+	printf("%d ",arr[i]);	
+	printf("\n");	
+	
+}
+int partition(int arr[15], int lb, int ub) {	
+	int pivot,down=lb,up=ub,temp;	
+	pivot=arr[lb];	
+	while(down<up){		
+		while(arr[down]<=pivot&&down<up){			
+			down++;					
+			
+		}		
+		while(arr[up]>pivot){			
+			up--;		
+			
+		}		
+		if(down<up){			
+			temp=arr[up];			
+			arr[up]=arr[down];			
+			arr[down]=temp;		
+			
+		}	
+		
+	}	
+	arr[lb]=arr[up];	
+	arr[up]=pivot;	
+	return up;	
+	
+}
+void quickSort(int arr[15], int low, int high) {	
+	int j;	
+	if(low<high){		
+		j=partition(arr,low,high);		
+		quickSort(arr,low,j-1);		
+		quickSort(arr,j+1,high);	
+		
+	}	
+	
+} 
