@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     // ==========================================================================
@@ -471,7 +471,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const initPoints = () => {
             points = [];
-            const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 10000), 100);
+            // Web performance optimization: Scale point density down on mobile to save CPU/battery
+            const isMobile = window.innerWidth < 768;
+            const divisor = isMobile ? 20000 : 10000;
+            const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / divisor), isMobile ? 30 : 90);
             
             const randomIP = () => `10.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*254)+1}`;
             
@@ -531,8 +534,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const p1 = points[i];
                 for (let j = i + 1; j < points.length; j++) {
                     const p2 = points[j];
+                    // Proximity check optimization: skip expensive Math.sqrt for distant points
                     const dx = p1.easeX - p2.easeX;
+                    if (Math.abs(dx) > 110) continue;
                     const dy = p1.easeY - p2.easeY;
+                    if (Math.abs(dy) > 110) continue;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
                     if (dist < 110) {
