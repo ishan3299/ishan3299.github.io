@@ -1,6 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
-    // 1. Scroll Progress & Navigation Dynamics (Apple Glass Effect)
+    // 1. Text Decryption / Scramble Animation System (Hacker Decrypt)
+    // ==========================================================================
+    class TextScrambler {
+        constructor(el) {
+            this.el = el;
+            this.chars = '!<>-_\\/[]{}—=+*^?#________0101';
+            this.update = this.update.bind(this);
+        }
+        setText(newText) {
+            const oldText = this.el.innerText;
+            const length = Math.max(oldText.length, newText.length);
+            const promise = new Promise((resolve) => this.resolve = resolve);
+            this.queue = [];
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || '';
+                const to = newText[i] || '';
+                const start = Math.floor(Math.random() * 20);
+                const end = start + Math.floor(Math.random() * 20);
+                this.queue.push({ from, to, start, end });
+            }
+            cancelAnimationFrame(this.frameRequest);
+            this.frame = 0;
+            this.update();
+            return promise;
+        }
+        update() {
+            let output = '';
+            let complete = 0;
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i];
+                if (this.frame >= end) {
+                    complete++;
+                    output += to;
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = this.randomChar();
+                        this.queue[i].char = char;
+                    }
+                    output += `<span style="color:var(--accent-red);text-shadow:0 0 5px var(--accent-red);">${char}</span>`;
+                } else {
+                    output += from;
+                }
+            }
+            this.el.innerHTML = output;
+            if (complete === this.queue.length) {
+                this.resolve();
+            } else {
+                this.frameRequest = requestAnimationFrame(this.update);
+                this.frame++;
+            }
+        }
+        randomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+    }
+
+    // Initialize scramble triggers on navigation links (hover effect)
+    document.querySelectorAll('.scramble-trigger').forEach(link => {
+        const originalText = link.innerText;
+        const scrambler = new TextScrambler(link);
+        let isScrambling = false;
+
+        link.addEventListener('mouseenter', () => {
+            if (isScrambling) return;
+            isScrambling = true;
+            scrambler.setText(originalText).then(() => {
+                isScrambling = false;
+            });
+        });
+    });
+
+    // ==========================================================================
+    // 2. Scroll Progress & Navigation Dynamics (Red Team Glass)
     // ==========================================================================
     const navbar = document.querySelector('.navbar');
     const scrollProgress = document.querySelector('.scroll-progress');
@@ -18,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollProgress.style.width = scrolled + '%';
         }
 
-        // Shrink and add shadow to navbar on scroll
+        // Shrink navbar on scroll
         if (navbar) {
             if (window.scrollY > 30) {
                 navbar.classList.add('scrolled');
@@ -34,11 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionTop = rect.top;
             
             const viewportHeight = window.innerHeight;
-            const triggerPoint = viewportHeight * 0.7; // Start animating line when section enters 70% of screen
+            const triggerPoint = viewportHeight * 0.7;
             
             if (sectionTop < triggerPoint) {
                 const distance = triggerPoint - sectionTop;
-                const progressPercent = Math.min(Math.max((distance / (sectionHeight - 100)) * 100, 0), 100);
+                const progressPercent = Math.min(Math.max((distance / (sectionHeight - 120)) * 100, 0), 100);
                 timelineGlow.style.height = progressPercent + '%';
             } else {
                 timelineGlow.style.height = '0%';
@@ -57,10 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger once on load in case page is loaded scrolled down
+    handleScroll();
 
     // ==========================================================================
-    // 2. Mobile Full-Screen Menu Toggle
+    // 3. Mobile Full-Screen Menu Toggle
     // ==========================================================================
     const hamburgerBtn = document.querySelector('.hamburger-btn');
     const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
@@ -81,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
                 hamburgerBtn.classList.remove('active');
-                mobileNavOverlay.classList.remove('remove');
                 mobileNavOverlay.classList.remove('active');
                 document.body.style.overflow = 'auto';
             });
@@ -89,12 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 3. Metric Counter Increments (Tick Animation)
+    // 4. Metric Counter Increments (Tick Animation)
     // ==========================================================================
     const startCounter = (el) => {
         const target = parseInt(el.getAttribute('data-target'), 10);
         let current = 0;
-        const duration = 1500; // Counter takes 1.5s to finish
+        const duration = 1500;
         const steps = 60;
         const stepTime = duration / steps;
         const increment = target / steps;
@@ -111,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ==========================================================================
-    // 4. Scroll Reveal Intersection Observer
+    // 5. Scroll Reveal Intersection Observer & Text Decrypter
     // ==========================================================================
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
@@ -120,6 +191,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 
+                // If it is a heading, run Decrypt Scrambler
+                const title = entry.target.querySelector('.scramble-target');
+                if (title) {
+                    const originalText = title.innerText;
+                    const scrambler = new TextScrambler(title);
+                    scrambler.setText(originalText);
+                }
+
                 // If it is a bento metric card with counter, start tick animation
                 const counter = entry.target.querySelector('.metric-number[data-target]');
                 if (counter) {
@@ -132,19 +211,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     animatePanelBars(activePanel);
                 }
                 
-                // Unobserve since we only want to reveal once
                 revealObserver.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px' // Trigger slightly before element fully enters
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
     // ==========================================================================
-    // 5. Skills Dashboard Console (Interactive Tabs)
+    // 6. Skills Console Tabs
     // ==========================================================================
     const consoleTabs = document.querySelectorAll('.console-tab');
     const consolePanels = document.querySelectorAll('.console-panel');
@@ -159,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const animatePanelBars = (panel) => {
         const bars = panel.querySelectorAll('.progress-bar');
         bars.forEach(bar => {
-            // Trigger animation frame delay so browser catches transition
             setTimeout(() => {
                 bar.style.width = bar.dataset.width;
             }, 100);
@@ -170,14 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
         tab.addEventListener('click', () => {
             const category = tab.getAttribute('data-category');
             
-            // Toggle Tab States
             consoleTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            // Toggle Panel States
             consolePanels.forEach(panel => {
                 panel.classList.remove('active');
-                // Reset bars back to 0 so they re-animate when clicked
                 panel.querySelectorAll('.progress-bar').forEach(bar => {
                     bar.style.width = '0%';
                 });
@@ -192,21 +266,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================================
-    // 6. Hacker Terminal Typwriter Mockup (Asynchronous Execution)
+    // 7. Tactical Metasploit-style Typewriter Simulator
     // ==========================================================================
     const initTerminalTypewriter = () => {
         const terminal = document.getElementById('hero-terminal');
         if (!terminal) return;
 
         const terminalCommands = [
-            { type: 'input', text: './initialize_adversary_sim.py --target local_subnet' },
-            { type: 'info', text: '[i] Loading threat intelligence profiles...' },
-            { type: 'info', text: '[i] Simulation mapping: MITRE ATT&CK Matrix' },
-            { type: 'success', text: '[+] Active profiles: T1003 (Credential Dumping), T1021 (Remote Services)' },
-            { type: 'input', text: 'run_kql_query --file detection_rule.kql' },
-            { type: 'success', text: '[✔] Threat Identified: Anomalous LSASS Access detected. Alert triggered!' },
-            { type: 'input', text: 'raven_agent --status' },
-            { type: 'cyan', text: '[info] Raven AI Agent: Online. 5+ Bug Bounty vulnerabilities validated.' }
+            { type: 'input', text: 'whoami' },
+            { type: 'output', text: 'ishan (Standard user privileges)' },
+            { type: 'input', text: './trendmicro_edr_killer.sh --exploit' },
+            { type: 'info', text: '[*] Locating EDR user-mode service hooks...' },
+            { type: 'info', text: '[*] Attempting unhooking technique via custom JMP instructions...' },
+            { type: 'alert', text: '[!] Injecting bypass hook at offset 0x7FFF32C8...' },
+            { type: 'success', text: '[✔] Success: Trend Micro EDR solution disabled successfully!' },
+            { type: 'input', text: './gain_root.py --escalate' },
+            { type: 'success', text: '[✔] Exploited local privilege escalation. Level: NT AUTHORITY\\SYSTEM' },
+            { type: 'input', text: 'start_raven_agent --autonomous' },
+            { type: 'purple', text: '[Raven] Active. Bypassed LLM safeguards. Executing bug bounty loop...' }
         ];
 
         terminal.innerHTML = ''; // Clear static markup
@@ -218,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add final blinking cursor line
                 const promptLine = document.createElement('div');
                 promptLine.className = 'terminal-line';
-                promptLine.innerHTML = `<span class="t-cyan">$</span> <span class="cursor"></span>`;
+                promptLine.innerHTML = `<span class="t-red">#</span> <span class="cursor"></span>`;
                 terminal.appendChild(promptLine);
                 return;
             }
@@ -228,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
             row.className = 'terminal-line';
 
             if (item.type === 'input') {
-                row.innerHTML = `<span class="t-cyan">$</span> <span class="cmd-text"></span>`;
+                row.innerHTML = `<span class="t-red">#</span> <span class="cmd-text"></span>`;
                 terminal.appendChild(row);
                 const txtNode = row.querySelector('.cmd-text');
 
@@ -240,33 +317,32 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(typeCharacter, 25 + Math.random() * 30);
                     } else {
                         lineIdx++;
-                        setTimeout(writeLine, 500); // Delay before next output line
+                        setTimeout(writeLine, 500);
                     }
                 };
                 typeCharacter();
             } else {
                 if (item.type === 'info') row.className += ' t-yellow';
                 else if (item.type === 'success') row.className += ' t-green';
-                else if (item.type === 'cyan') row.className += ' t-cyan';
+                else if (item.type === 'alert') row.className += ' t-red';
+                else if (item.type === 'purple') row.className += ' t-purple';
 
                 row.textContent = item.text;
                 terminal.appendChild(row);
                 lineIdx++;
-                setTimeout(writeLine, 250); // Small gap between prints
+                setTimeout(writeLine, 250);
             }
             
-            // Scroll to keep logs readable
             terminal.scrollTop = terminal.scrollHeight;
         };
 
-        // Start typing loop after 800ms fade-in lag
         setTimeout(writeLine, 800);
     };
 
     initTerminalTypewriter();
 
     // ==========================================================================
-    // 7. Interactive Canvas Particle Mesh Background (Fluid Dynamic Grid)
+    // 8. Tactical Target Scanning Canvas (Radar Sweeper Mesh)
     // ==========================================================================
     const initCanvasMesh = () => {
         const canvas = document.getElementById('mesh-canvas');
@@ -275,8 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let points = [];
         const mouse = { x: null, y: null, targetX: null, targetY: null, radius: 180 };
+        let sweepAngle = 0;
 
-        // Mouse motion listener (feeds CSS custom variables and Javascript physics loop)
         window.addEventListener('mousemove', (e) => {
             mouse.targetX = e.clientX;
             mouse.targetY = e.clientY;
@@ -291,8 +367,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const initPoints = () => {
             points = [];
-            // Node density: roughly one node per 9,000 square pixels
-            const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 9000), 120);
+            const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 10000), 100);
+            
+            const randomIP = () => `10.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*254)+1}`;
             
             for (let i = 0; i < count; i++) {
                 const x = Math.random() * window.innerWidth;
@@ -302,12 +379,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     y: y,
                     originX: x,
                     originY: y,
-                    vx: (Math.random() - 0.5) * 0.35,
-                    vy: (Math.random() - 0.5) * 0.35,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
                     easeX: x,
                     easeY: y,
-                    color: Math.random() > 0.55 ? 'var(--accent-cyan)' : 'var(--accent-purple)',
-                    radius: Math.random() * 1.5 + 0.8
+                    radius: Math.random() * 1.5 + 0.8,
+                    color: Math.random() > 0.6 ? 'var(--accent-red)' : 'var(--accent-purple)',
+                    ip: randomIP(),
+                    isHighlighted: false,
+                    highlightTimer: 0
                 });
             }
         };
@@ -324,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const drawMesh = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Interpolate mouse movements for slick friction drag
+            // Interpolate mouse movements
             if (mouse.targetX !== null) {
                 if (mouse.x === null) {
                     mouse.x = mouse.targetX;
@@ -338,7 +418,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 mouse.y = null;
             }
 
-            // Draw network link lines
+            // Radar scan logic
+            sweepAngle += 0.01;
+            const sweepRadius = 250;
+
+            // Draw network lines
             for (let i = 0; i < points.length; i++) {
                 const p1 = points[i];
                 for (let j = i + 1; j < points.length; j++) {
@@ -347,61 +431,112 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dy = p1.easeY - p2.easeY;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < 115) {
+                    if (dist < 110) {
                         ctx.beginPath();
                         ctx.moveTo(p1.easeX, p1.easeY);
                         ctx.lineTo(p2.easeX, p2.easeY);
                         
-                        // Dynamic opacity based on proximity
-                        const alpha = ((115 - dist) / 115) * 0.06;
-                        ctx.strokeStyle = p1.color === 'var(--accent-cyan)' 
-                            ? `rgba(0, 243, 255, ${alpha})` 
+                        let alpha = ((110 - dist) / 110) * 0.05;
+                        if (p1.isHighlighted || p2.isHighlighted) {
+                            alpha *= 2.5; // Double opacity if node is scanned
+                        }
+                        
+                        ctx.strokeStyle = p1.color === 'var(--accent-red)' 
+                            ? `rgba(255, 0, 60, ${alpha})` 
                             : `rgba(157, 78, 221, ${alpha})`;
-                        ctx.lineWidth = 0.45;
+                        ctx.lineWidth = p1.isHighlighted || p2.isHighlighted ? 0.6 : 0.4;
                         ctx.stroke();
                     }
                 }
             }
 
-            // Draw node particles
+            // Draw scanning sweep lines projecting from mouse
+            if (mouse.x !== null) {
+                ctx.beginPath();
+                ctx.arc(mouse.x, mouse.y, sweepRadius, sweepAngle, sweepAngle + 0.4);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.closePath();
+                
+                const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, sweepRadius);
+                grad.addColorStop(0, 'rgba(255, 0, 60, 0.03)');
+                grad.addColorStop(0.8, 'rgba(255, 0, 60, 0.01)');
+                grad.addColorStop(1, 'transparent');
+                
+                ctx.fillStyle = grad;
+                ctx.fill();
+            }
+
+            // Update & Draw nodes
             points.forEach(p => {
-                // Background drift
                 p.originX += p.vx;
                 p.originY += p.vy;
 
-                // Bounce off boundaries
                 if (p.originX < 0 || p.originX > window.innerWidth) p.vx *= -1;
                 if (p.originY < 0 || p.originY > window.innerHeight) p.vy *= -1;
 
                 let targetX = p.originX;
                 let targetY = p.originY;
 
-                // Local dynamic warp
+                // Repulsion warp from mouse
                 if (mouse.x !== null) {
                     const dx = p.originX - mouse.x;
                     const dy = p.originY - mouse.y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
+                    // Check if node lies in sweep beam angle
+                    const angleToNode = Math.atan2(dy, dx);
+                    // Map angle to 0 - 2PI range
+                    let diffAngle = angleToNode - (sweepAngle % (Math.PI * 2));
+                    while (diffAngle < -Math.PI) diffAngle += Math.PI * 2;
+                    while (diffAngle > Math.PI) diffAngle -= Math.PI * 2;
+
+                    if (dist < sweepRadius && Math.abs(diffAngle) < 0.2) {
+                        p.isHighlighted = true;
+                        p.highlightTimer = 50; // stays active for 50 frames
+                    }
+
                     if (dist < mouse.radius) {
-                        // Elastic repulsion force calculation
                         const force = (mouse.radius - dist) / mouse.radius;
                         const angle = Math.atan2(dy, dx);
-                        targetX = p.originX + Math.cos(angle) * force * 45;
-                        targetY = p.originY + Math.sin(angle) * force * 45;
+                        targetX = p.originX + Math.cos(angle) * force * 50;
+                        targetY = p.originY + Math.sin(angle) * force * 50;
                     }
                 }
 
-                // Elastic drag interpolation
-                p.easeX += (targetX - p.easeX) * 0.07;
-                p.easeY += (targetY - p.easeY) * 0.07;
+                // Decay highlights
+                if (p.highlightTimer > 0) {
+                    p.highlightTimer--;
+                } else {
+                    p.isHighlighted = false;
+                }
+
+                // Easing coordinate changes
+                p.easeX += (targetX - p.easeX) * 0.08;
+                p.easeY += (targetY - p.easeY) * 0.08;
 
                 // Render particle
                 ctx.beginPath();
-                ctx.arc(p.easeX, p.easeY, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = p.color === 'var(--accent-cyan)' 
-                    ? 'rgba(0, 243, 255, 0.45)' 
-                    : 'rgba(157, 78, 221, 0.45)';
-                ctx.fill();
+                ctx.arc(p.easeX, p.easeY, p.isHighlighted ? p.radius * 2 : p.radius, 0, Math.PI * 2);
+                
+                if (p.isHighlighted) {
+                    ctx.fillStyle = 'var(--accent-red)';
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'var(--accent-red)';
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // reset shadow
+
+                    // Print Target Metadata Label
+                    ctx.font = '7.5px monospace';
+                    ctx.fillStyle = 'rgba(255, 0, 60, 0.7)';
+                    ctx.fillText(`[TARGET:${p.ip}]`, p.easeX + 8, p.easeY - 4);
+                    ctx.fillStyle = 'rgba(0, 255, 102, 0.7)';
+                    ctx.fillText(`[BYPASS:OK]`, p.easeX + 8, p.easeY + 5);
+                } else {
+                    ctx.fillStyle = p.color === 'var(--accent-red)' 
+                        ? 'rgba(255, 0, 60, 0.4)' 
+                        : 'rgba(157, 78, 221, 0.4)';
+                    ctx.fill();
+                }
             });
 
             requestAnimationFrame(drawMesh);
