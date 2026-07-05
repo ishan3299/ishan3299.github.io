@@ -406,75 +406,99 @@
             </div>
         </section>
 
-        <!-- Pinned Operations (Projects Bento Grid) -->
+        <!-- Pinned Operations (Asymmetric Bento Grid Utilizing Widescreen Space) -->
         <section id="projects" class="container section">
             <div class="section-header reveal-on-scroll">
                 <span class="section-tag">// PINNED_OPERATIONS:04</span>
-                <h2 class="section-title scramble-target">Operational Projects</h2>
+                <h2 class="section-title scramble-target">GitHub Operations & Arsenal</h2>
             </div>
 
-            <div class="projects-grid-modern">
-                <!-- Project 1: Raven (Large Showcase Card) -->
-                <div class="project-showcase red-border reveal-on-scroll">
-                    <div class="project-showcase-info">
-                        <div class="proj-badge alert-badge"><i class="fas fa-skull"></i> PINNED_OPERATION</div>
-                        <h3>Operation Raven: Autonomous Bug Bounty AI Agent</h3>
-                        <p class="proj-desc">
-                            An advanced AI-driven offensive security agent designed to autonomously chain exploits, audit APIs, and bypass safety guardrails to validate critical logic vulnerabilities.
-                        </p>
-                        <ul class="proj-features red-bullets">
-                            <li><i class="fas fa-circle-notch fa-spin"></i> Discovered 5+ verified bug bounty vulnerabilities using AI workflows.</li>
-                            <li><i class="fas fa-circle-notch fa-spin"></i> Bypassed Gemini AI safeguards in isolated spaces to execute deep validation.</li>
-                            <li><i class="fas fa-circle-notch fa-spin"></i> Created self-improving skill architectures where the agent acquires new modules dynamically.</li>
-                            <li><i class="fas fa-circle-notch fa-spin"></i> Wrote 10+ offensive security modules integrated with the Gemini CLI.</li>
-                        </ul>
-                        <div class="proj-tech">
-                            <span>Python</span>
-                            <span>AI Red Teaming</span>
-                            <span>LLM Exploitation</span>
-                            <span>Gemini API</span>
-                        </div>
-                    </div>
-                    <div class="project-showcase-visual">
-                        <div class="visual-terminal MSF-console">
-                            <div class="terminal-bar red-bar">
-                                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                                <span>raven_agent_console.sh</span>
+            <div class="projects-bento-grid">
+                <!-- Bento Block 1: Raven (Wide Core Operation Showcase) -->
+                <div class="project-card showcase-wide bento-item reveal-on-scroll">
+                    <div class="project-bento-inner">
+                        <div class="bento-info-panel">
+                            <div class="proj-badge alert-badge"><i class="fas fa-skull"></i> OPERATION_RAVEN</div>
+                            <h3 class="scramble-hover">Autonomous Bug Bounty AI Agent</h3>
+                            <p class="proj-desc">
+                                A self-evolving AI agent built in Python, integrated with the Gemini CLI, to automate application mapping, vulnerability testing, and payload validation dynamically.
+                            </p>
+                            <ul class="proj-features red-bullets">
+                                <li><i class="fas fa-circle-notch fa-spin"></i> Discovered 5+ verified logic bugs on live targets.</li>
+                                <li><i class="fas fa-circle-notch fa-spin"></i> Bypassed safety parameters via contextual prompt engineering.</li>
+                                <li><i class="fas fa-circle-notch fa-spin"></i> Dynamically compiles and runs 10+ validation modules.</li>
+                            </ul>
+                            <div class="proj-tech">
+                                <span>Python</span>
+                                <span>AI Red Teaming</span>
+                                <span>LLMs</span>
+                                <span>API Auditing</span>
                             </div>
-                            <div class="terminal-body small-text">
-                                <div class="term-line"><span class="t-red">#</span> ./raven_daemon.py --target api.corp --scan</div>
-                                <div class="term-line t-yellow">[*] Launching target mapping... 8 routes identified</div>
-                                <div class="term-line t-yellow">[*] Analyzing route /v2/debug/invoice_payload</div>
-                                <div class="term-line t-red">[!] ALERT: Found IDOR parameter vulnerability</div>
-                                <div class="term-line"><span class="t-red">#</span> ./raven_daemon.py --exploit IDOR --bypass</div>
-                                <div class="term-line t-purple">[*] Crafting payload bypass sequence via LLM hooks...</div>
-                                <div class="term-line t-red">[!] Bypass Successful: Exfiltrated root database records</div>
-                                <div class="term-line t-green">[✔] Exploit report compiled. Severity Score: 9.1 (Critical)</div>
+                        </div>
+                        <div class="bento-visual-panel">
+                            <div class="visual-terminal MSF-console">
+                                <div class="terminal-bar red-bar">
+                                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                                    <span>raven_agent_console.sh</span>
+                                </div>
+                                <div class="terminal-body small-text">
+                                    <div class="term-line"><span class="t-red">#</span> ./raven_daemon.py --target api.corp --scan</div>
+                                    <div class="term-line t-yellow">[*] Launching target mapping... 8 routes identified</div>
+                                    <div class="term-line t-yellow">[*] Analyzing route /v2/debug/invoice_payload</div>
+                                    <div class="term-line t-red">[!] ALERT: Found IDOR parameter vulnerability</div>
+                                    <div class="term-line"><span class="t-red">#</span> ./raven_daemon.py --exploit IDOR --bypass</div>
+                                    <div class="term-line t-purple">[*] Crafting payload bypass sequence via LLM hooks...</div>
+                                    <div class="term-line t-red">[!] Bypass Successful: Exfiltrated root database records</div>
+                                    <div class="term-line t-green">[✔] Exploit report compiled. Severity Score: 9.1 (Critical)</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2: Adversary Simulation Lab (Grid Card) -->
-                <div class="project-small-card red-border reveal-on-scroll delay-1">
+                <!-- Bento Block 2: AutoDetect Hub (Core GitHub Project) -->
+                <div class="project-card bento-item reveal-on-scroll delay-1">
                     <div class="project-card-header">
-                        <div class="proj-badge">ENVIRONMENT</div>
-                        <i class="fas fa-spider card-icon text-red"></i>
+                        <div class="proj-badge">GITHUB_PROJ</div>
+                        <i class="fab fa-git-alt card-icon text-red"></i>
                     </div>
-                    <h3>Adversary Simulation Lab</h3>
-                    <p>
-                        A mock enterprise forest environment configured to simulate full APT attacks and privilege escalation pathways.
+                    <h3 class="scramble-hover">AutoDetect Hub</h3>
+                    <p class="bento-desc">
+                        A fully automated detection engineering pipeline synchronized and executed daily via GitHub Actions.
                     </p>
                     <ul class="proj-features-small red-bullets">
-                        <li>Simulated 10+ adversarial techniques including LSASS credential dumping, NTDS.dit harvesting, and process hollowing.</li>
-                        <li>Tested evasion methodologies against configured Defender telemetry channels.</li>
-                        <li>Calculated detection gap statistics and mapped coverage grids to MITRE ATT&CK.</li>
+                        <li>Automated Python pipelines fetch threat feed intelligence logs daily.</li>
+                        <li>Compiles rules dynamically to Sentinel-compatible KQL and Sigma configurations.</li>
+                        <li>Scheduled workflows deploy signatures to active production environments automatically.</li>
+                    </ul>
+                    <div class="proj-tech">
+                        <span>Python</span>
+                        <span>GitHub Actions</span>
+                        <span>SIEM Deploys</span>
+                        <span>Sigma</span>
+                    </div>
+                </div>
+
+                <!-- Bento Block 3: Adversary Simulation Lab -->
+                <div class="project-card bento-item reveal-on-scroll delay-2">
+                    <div class="project-card-header">
+                        <div class="proj-badge">RED_LAB</div>
+                        <i class="fas fa-spider card-icon text-red"></i>
+                    </div>
+                    <h3 class="scramble-hover">Adversary Simulation Lab</h3>
+                    <p class="bento-desc">
+                        A hyper-realistic mock directory forest designed to emulate APT techniques and validation workflows.
+                    </p>
+                    <ul class="proj-features-small red-bullets">
+                        <li>Simulates process hollowing, LSASS extraction, and remote service attacks.</li>
+                        <li>Audits defensive coverage margins against custom built indicators.</li>
+                        <li>Calculates metric coverage logs mapped directly to MITRE ATT&CK.</li>
                     </ul>
                     <div class="proj-tech">
                         <span>Sysmon</span>
                         <span>Windows AD</span>
-                        <span>MITRE ATT&CK</span>
                         <span>PowerShell</span>
+                        <span>ATT&CK</span>
                     </div>
                 </div>
             </div>

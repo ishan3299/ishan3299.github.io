@@ -546,4 +546,40 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initCanvasMesh();
+
+    // ==========================================================================
+    // 9. Moving Border card glows & Interactive Title Scramblers
+    // ==========================================================================
+    const initCardSpotlights = () => {
+        const cards = document.querySelectorAll('.card, .bento-item, .achievement-card, .education-card');
+        
+        cards.forEach(card => {
+            // Track mouse positions relative to cards
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--card-x', `${x}px`);
+                card.style.setProperty('--card-y', `${y}px`);
+            });
+
+            // Set up text scramble on hovered card title
+            const titleEl = card.querySelector('.scramble-hover');
+            if (titleEl) {
+                const originalText = titleEl.innerText;
+                const scrambler = new TextScrambler(titleEl);
+                let isScrambling = false;
+
+                card.addEventListener('mouseenter', () => {
+                    if (isScrambling) return;
+                    isScrambling = true;
+                    scrambler.setText(originalText).then(() => {
+                        isScrambling = false;
+                    });
+                });
+            }
+        });
+    };
+
+    initCardSpotlights();
 });
