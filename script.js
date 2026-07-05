@@ -266,11 +266,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================================
-    // 7. Tactical Metasploit-style Typewriter Simulator
+    // 7. Tactical Metasploit-style Interactive Shell Simulator
     // ==========================================================================
     const initTerminalTypewriter = () => {
         const terminal = document.getElementById('hero-terminal');
-        if (!terminal) return;
+        const hiddenInput = document.getElementById('terminal-input');
+        const mockupContainer = document.querySelector('.terminal-mockup');
+        if (!terminal || !hiddenInput || !mockupContainer) return;
 
         const terminalCommands = [
             { type: 'input', text: 'whoami' },
@@ -287,16 +289,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         terminal.innerHTML = ''; // Clear static markup
-
         let lineIdx = 0;
 
         const writeLine = () => {
             if (lineIdx >= terminalCommands.length) {
-                // Add final blinking cursor line
-                const promptLine = document.createElement('div');
-                promptLine.className = 'terminal-line';
-                promptLine.innerHTML = `<span class="t-red">#</span> <span class="cursor"></span>`;
-                terminal.appendChild(promptLine);
+                // Initial script complete -> Enable Interactive CLI
+                printLine('[i] Terminal interactive shell enabled.', 'info');
+                printLine('Type "help" to display available red-team command operations.', 'info');
+                setupInteractiveMode();
                 return;
             }
 
@@ -334,6 +334,110 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             terminal.scrollTop = terminal.scrollHeight;
+        };
+
+        // Helper prints
+        const printLine = (text, type = 'output') => {
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            if (type === 'info') line.className += ' t-yellow';
+            else if (type === 'success') line.className += ' t-green';
+            else if (type === 'alert') line.className += ' t-red';
+            else if (type === 'purple') line.className += ' t-purple';
+            line.textContent = text;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+        };
+
+        // Set up events for manual typing
+        const setupInteractiveMode = () => {
+            let promptLine = document.createElement('div');
+            promptLine.className = 'terminal-line input-prompt-line';
+            promptLine.innerHTML = `<span class="t-red">#</span> <span class="typed-text"></span><span class="cursor"></span>`;
+            terminal.appendChild(promptLine);
+            terminal.scrollTop = terminal.scrollHeight;
+
+            const typedTextEl = promptLine.querySelector('.typed-text');
+
+            // Click focuses hidden text input
+            mockupContainer.addEventListener('click', () => {
+                hiddenInput.focus();
+            });
+
+            hiddenInput.addEventListener('focus', () => {
+                mockupContainer.classList.add('focused');
+            });
+
+            hiddenInput.addEventListener('blur', () => {
+                mockupContainer.classList.remove('focused');
+            });
+
+            // Handle typing inputs
+            hiddenInput.addEventListener('input', (e) => {
+                typedTextEl.textContent = e.target.value;
+            });
+
+            // Handle enters
+            hiddenInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const rawCmd = hiddenInput.value.trim();
+                    hiddenInput.value = '';
+                    typedTextEl.textContent = '';
+                    
+                    // Remove input line temporarily, log command, then run processor
+                    promptLine.remove();
+                    printLine(rawCmd); // Prints command output as a static line
+                    
+                    if (rawCmd) {
+                        processCommand(rawCmd.toLowerCase());
+                    }
+                    
+                    // Re-append active input prompt line at the bottom
+                    terminal.appendChild(promptLine);
+                    terminal.scrollTop = terminal.scrollHeight;
+                }
+            });
+        };
+
+        // Interactive Command Router
+        const processCommand = (cmd) => {
+            switch (cmd) {
+                case 'help':
+                    printLine('Available Red-Team commands:', 'info');
+                    printLine('  whoami       - Reveal active session operator details');
+                    printLine('  bypass-edr   - Execute local unhooking memory vectors');
+                    printLine('  list-ops     - List corporate campaign targets');
+                    printLine('  run-raven    - Invoke autonomous API exploit daemon');
+                    printLine('  clear        - Clear console output logs');
+                    break;
+                case 'whoami':
+                    printLine('[+] NT AUTHORITY\\SYSTEM // Red Team Operator: Ishan Patel', 'success');
+                    printLine('[+] Active campaigns: PwC Red Emulation Team // Gurugram', 'success');
+                    break;
+                case 'bypass-edr':
+                    printLine('[*] Targeting local active security agents...', 'info');
+                    printLine('[!] Memory segment manipulation initialized...', 'alert');
+                    printLine('[!] Overwriting service entry hook JMP offsets...', 'alert');
+                    printLine('[✔] Bypass payload injected. Target EDR disabled successfully!', 'success');
+                    break;
+                case 'list-ops':
+                    printLine('Active GitHub & Laboratory Campaigns:', 'info');
+                    printLine('  - AutoDetect Hub [sync:DAILY_RUNNER] [status:ACTIVE]', 'success');
+                    printLine('  - Operation Raven [agent:AI_DAEMON] [status:MONITORING]', 'success');
+                    printLine('  - Adversary Simulation Lab [status:DEPLOYED]', 'success');
+                    break;
+                case 'run-raven':
+                    printLine('[*] Launching Raven autonomous exploit engine...', 'purple');
+                    printLine('[Raven] Scanned target endpoints. Exposed route: /v2/debug/invoice_payload', 'purple');
+                    printLine('[Raven] Exploit deployed: IDOR bypass query triggered.', 'alert');
+                    printLine('[✔] Success: Exfiltrated root administrator database credentials.', 'success');
+                    break;
+                case 'clear':
+                    terminal.innerHTML = '';
+                    break;
+                default:
+                    printLine(`[-] command not found: ${cmd}. Type "help" for a list of operations.`, 'alert');
+            }
         };
 
         setTimeout(writeLine, 800);

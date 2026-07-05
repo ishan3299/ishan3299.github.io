@@ -78,19 +78,9 @@
                             <span class="terminal-status">[TARGET: SECURE_HOST]</span>
                         </div>
                         <div class="terminal-body" id="hero-terminal">
-                            <div class="terminal-line"><span class="t-red">#</span> whoami</div>
-                            <div class="terminal-line">ishan (Standard User privileges)</div>
-                            <div class="terminal-line"><span class="t-red">#</span> ./trendmicro_edr_killer.sh --exploit</div>
-                            <div class="terminal-line t-yellow">[*] Locating EDR user-mode service hooks...</div>
-                            <div class="terminal-line t-yellow">[*] Attempting unhooking technique via custom JMP instructions...</div>
-                            <div class="terminal-line t-red">[!] Injecting bypass hook at offset 0x7FFF32C8...</div>
-                            <div class="terminal-line t-green">[✔] Success: Trend Micro EDR solution disabled successfully!</div>
-                            <div class="terminal-line"><span class="t-red">#</span> ./gain_root.py --escalate</div>
-                            <div class="terminal-line t-green">[✔] Exploited local privilege escalation. Level: NT AUTHORITY\SYSTEM</div>
-                            <div class="terminal-line"><span class="t-red">#</span> start_raven_agent --autonomous</div>
-                            <div class="terminal-line t-purple">[Raven] Active. Bypassed LLM safeguards. Executing bug bounty loop...</div>
-                            <div class="terminal-line cursor-line"><span class="t-red">#</span> <span class="cursor">|</span></div>
+                            <!-- Logs will print here dynamically -->
                         </div>
+                        <input type="text" id="terminal-input" class="hidden-input" aria-label="Terminal input" autocomplete="off" spellcheck="false" />
                     </div>
                 </div>
             </div>
