@@ -264,4 +264,151 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initTerminalTypewriter();
+
+    // ==========================================================================
+    // 7. Interactive Canvas Particle Mesh Background (Fluid Dynamic Grid)
+    // ==========================================================================
+    const initCanvasMesh = () => {
+        const canvas = document.getElementById('mesh-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        let points = [];
+        const mouse = { x: null, y: null, targetX: null, targetY: null, radius: 180 };
+
+        // Mouse motion listener (feeds CSS custom variables and Javascript physics loop)
+        window.addEventListener('mousemove', (e) => {
+            mouse.targetX = e.clientX;
+            mouse.targetY = e.clientY;
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.targetX = null;
+            mouse.targetY = null;
+        });
+
+        const initPoints = () => {
+            points = [];
+            // Node density: roughly one node per 9,000 square pixels
+            const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 9000), 120);
+            
+            for (let i = 0; i < count; i++) {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                points.push({
+                    x: x,
+                    y: y,
+                    originX: x,
+                    originY: y,
+                    vx: (Math.random() - 0.5) * 0.35,
+                    vy: (Math.random() - 0.5) * 0.35,
+                    easeX: x,
+                    easeY: y,
+                    color: Math.random() > 0.55 ? 'var(--accent-cyan)' : 'var(--accent-purple)',
+                    radius: Math.random() * 1.5 + 0.8
+                });
+            }
+        };
+
+        const resize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initPoints();
+        };
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        const drawMesh = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Interpolate mouse movements for slick friction drag
+            if (mouse.targetX !== null) {
+                if (mouse.x === null) {
+                    mouse.x = mouse.targetX;
+                    mouse.y = mouse.targetY;
+                } else {
+                    mouse.x += (mouse.targetX - mouse.x) * 0.08;
+                    mouse.y += (mouse.targetY - mouse.y) * 0.08;
+                }
+            } else {
+                mouse.x = null;
+                mouse.y = null;
+            }
+
+            // Draw network link lines
+            for (let i = 0; i < points.length; i++) {
+                const p1 = points[i];
+                for (let j = i + 1; j < points.length; j++) {
+                    const p2 = points[j];
+                    const dx = p1.easeX - p2.easeX;
+                    const dy = p1.easeY - p2.easeY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 115) {
+                        ctx.beginPath();
+                        ctx.moveTo(p1.easeX, p1.easeY);
+                        ctx.lineTo(p2.easeX, p2.easeY);
+                        
+                        // Dynamic opacity based on proximity
+                        const alpha = ((115 - dist) / 115) * 0.06;
+                        ctx.strokeStyle = p1.color === 'var(--accent-cyan)' 
+                            ? `rgba(0, 243, 255, ${alpha})` 
+                            : `rgba(157, 78, 221, ${alpha})`;
+                        ctx.lineWidth = 0.45;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw node particles
+            points.forEach(p => {
+                // Background drift
+                p.originX += p.vx;
+                p.originY += p.vy;
+
+                // Bounce off boundaries
+                if (p.originX < 0 || p.originX > window.innerWidth) p.vx *= -1;
+                if (p.originY < 0 || p.originY > window.innerHeight) p.vy *= -1;
+
+                let targetX = p.originX;
+                let targetY = p.originY;
+
+                // Local dynamic warp
+                if (mouse.x !== null) {
+                    const dx = p.originX - mouse.x;
+                    const dy = p.originY - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < mouse.radius) {
+                        // Elastic repulsion force calculation
+                        const force = (mouse.radius - dist) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        targetX = p.originX + Math.cos(angle) * force * 45;
+                        targetY = p.originY + Math.sin(angle) * force * 45;
+                    }
+                }
+
+                // Elastic drag interpolation
+                p.easeX += (targetX - p.easeX) * 0.07;
+                p.easeY += (targetY - p.easeY) * 0.07;
+
+                // Render particle
+                ctx.beginPath();
+                ctx.arc(p.easeX, p.easeY, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color === 'var(--accent-cyan)' 
+                    ? 'rgba(0, 243, 255, 0.45)' 
+                    : 'rgba(157, 78, 221, 0.45)';
+                ctx.fill();
+            });
+
+            requestAnimationFrame(drawMesh);
+        };
+
+        requestAnimationFrame(drawMesh);
+    };
+
+    initCanvasMesh();
 });
