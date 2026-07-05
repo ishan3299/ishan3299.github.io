@@ -3,266 +3,555 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ishan Patel | Cybersecurity Professional</title>
-    <meta name="description" content="Portfolio of Ishan Patel - Cybersecurity Professional specializing in Threat Hunting, Incident Response, and Detection Engineering.">
+    <title>Ishan Patel | Security Engineer</title>
+    <meta name="description" content="Portfolio of Ishan Patel - Security Engineer specializing in Threat Hunting, Detection Engineering, Red Teaming, and Adversary Simulation.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="overlay"></div>
     <div class="scanline"></div>
+    <div class="scroll-progress"></div>
 
-    <header>
-        <nav class="container">
-            <div class="logo">&lt;Ishan/&gt;</div>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container container">
+            <a href="#hero" class="logo">
+                <span class="logo-bracket">&lt;</span>IshanPatel<span class="logo-bracket">/&gt;</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact" class="nav-cta">Connect</a></li>
             </ul>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
+            <button class="hamburger-btn" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
     </header>
 
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay">
+        <ul class="mobile-nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact" class="mobile-cta">Connect</a></li>
+        </ul>
+    </div>
+
     <main>
-        <section id="hero" class="container">
-            <div class="hero-content">
-                <p class="terminal-text">Initializing user profile...</p>
-                <h1 class="glitch" data-text="Ishan Patel">Ishan Patel</h1>
-                <h2>Cybersecurity Professional</h2>
-                <p class="subtitle">Threat Hunting | Incident Response | Detection Engineering</p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn primary">Contact Me</a>
-                    <a href="#experience" class="btn secondary">View Experience</a>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container hero-wrapper">
+                <div class="hero-text-content reveal-on-scroll">
+                    <div class="badge">SEC_ENG // PORTFOLIO 2026</div>
+                    <h1 class="hero-title">
+                        Redefining <span class="gradient-text">Digital Defense</span> <br>through Adversary Simulation.
+                    </h1>
+                    <p class="hero-subtitle">
+                        Security Engineer with 5+ years of experience engineering detection logic, threat hunting with KQL, and simulating advanced adversary behaviors to secure hybrid systems.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#projects" class="btn btn-primary">Explore Pinned Projects</a>
+                        <a href="#experience" class="btn btn-secondary">View Experience</a>
+                    </div>
+                </div>
+
+                <!-- Interactive Terminal Widget -->
+                <div class="hero-widget reveal-on-scroll delay-1">
+                    <div class="terminal-mockup">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="terminal-title">threat_hunt_console.sh</span>
+                        </div>
+                        <div class="terminal-body" id="hero-terminal">
+                            <div class="terminal-line"><span class="t-cyan">$</span> ./initialize_adversary_sim.py --target local_subnet</div>
+                            <div class="terminal-line t-yellow">[i] Loading threat intelligence profiles...</div>
+                            <div class="terminal-line t-yellow">[i] Simulation mapping: MITRE ATT&CK Matrix</div>
+                            <div class="terminal-line t-green">[+] Active profiles: T1003 (Credential Dumping), T1021 (Remote Services)</div>
+                            <div class="terminal-line"><span class="t-cyan">$</span> run_kql_query --file detection_rule.kql</div>
+                            <div class="terminal-line t-green">[✔] Threat Identified: Anomalous LSASS Access detected. Alert triggered!</div>
+                            <div class="terminal-line"><span class="t-cyan">$</span> raven_agent --status</div>
+                            <div class="terminal-line t-cyan">[info] Raven AI Agent: Online. 5+ Bug Bounty vulnerabilities validated.</div>
+                            <div class="terminal-line cursor-line"><span class="t-cyan">$</span> <span class="cursor">|</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll to Explore</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- Metrics Section (Apple Bento Style) -->
+        <section id="metrics" class="container section">
+            <div class="metrics-grid">
+                <div class="metric-card reveal-on-scroll">
+                    <div class="metric-number" data-target="5">0</div>
+                    <div class="metric-label">Years Cyber Experience</div>
+                </div>
+                <div class="metric-card reveal-on-scroll delay-1">
+                    <div class="metric-number">AIR 8</div>
+                    <div class="metric-label">NCIIPC CTF Rank</div>
+                </div>
+                <div class="metric-card reveal-on-scroll delay-2">
+                    <div class="metric-number" data-target="50">0</div>
+                    <div class="metric-label">Custom Sigma Detections</div>
                 </div>
             </div>
         </section>
 
+        <!-- About Me Section -->
         <section id="about" class="container section">
-            <h2 class="section-title"><span class="hash">#</span> About_Me</h2>
-            <div class="card">
-                <p>
-                    Cybersecurity professional with 4+ years of experience in <strong>threat hunting, incident response, and detection engineering</strong> across enterprise and cloud environments. 
-                    Skilled in <strong>Microsoft Sentinel, Microsoft Defender XDR, CrowdStrike, and Azure Security Center</strong>. 
-                    Familiar with <strong>KQL for basic hunting and data queries</strong>, and experienced in automation using Python and PowerShell. 
-                    Passionate about building resilient defenses and enhancing security visibility across hybrid infrastructures.
-                </p>
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tag">01 / OVERVIEW</span>
+                <h2 class="section-title">Professional Summary</h2>
+            </div>
+            <div class="about-card card reveal-on-scroll">
+                <div class="about-grid">
+                    <div class="about-main-text">
+                        <p class="lead">
+                            I am a Security Engineer driven by threat behavior, offensive logic, and automated detection pipelines.
+                        </p>
+                        <p>
+                            Over the past 5 years, my work has spanned the intersection of red teaming and blue teaming. By analyzing real-world adversary tactics and simulating campaigns, I design hardened security monitoring rules that capture anomalies across endpoint logs, network traffic, and hybrid cloud infrastructures.
+                        </p>
+                    </div>
+                    <div class="about-focus-areas">
+                        <h3>Core Methodologies</h3>
+                        <ul class="focus-list">
+                            <li><i class="fas fa-crosshairs"></i> Adversary Emulation & MITRE ATT&CK Mapping</li>
+                            <li><i class="fas fa-search-plus"></i> Threat Hunting & Advanced KQL Writing</li>
+                            <li><i class="fas fa-shield-alt"></i> Sigma & Custom SIEM Detection Engineering</li>
+                            <li><i class="fas fa-robot"></i> AI-Powered Offensive Workflows (LLMs in Security)</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Experience Section (Interactive Scrolling Timeline) -->
         <section id="experience" class="container section">
-            <h2 class="section-title"><span class="hash">#</span> Experience</h2>
-            <div class="timeline">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tag">02 / HISTORY</span>
+                <h2 class="section-title">Professional Journey</h2>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-line-glow"></div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">Aug 2024 - Present</div>
-                    <div class="timeline-content card">
-                        <h3>Security Researcher</h3>
-                        <h4>Attackfence Techlabs Private Limited, Gurugram</h4>
-                        <ul>
-                            <li>Built and tuned detection logic in <strong>Microsoft Defender</strong> and <strong>Sentinel</strong>, increasing threat visibility by 40%.</li>
-                            <li>Developed basic hunting queries to uncover anomalies across endpoint and cloud telemetry.</li>
-                            <li>Reverse-engineered malware to extract TTPs and mapped results to <strong>MITRE ATT&CK</strong>.</li>
-                            <li>Collaborated with IR teams to automate enrichment and streamline response playbooks using <strong>Python and PowerShell</strong>.</li>
+                <!-- Experience Item 1 -->
+                <div class="experience-block reveal-on-scroll">
+                    <div class="experience-meta">
+                        <span class="exp-date">Apr 2026 – Present</span>
+                        <h4 class="exp-company"><i class="fas fa-building"></i> PwC (PricewaterhouseCoopers Services LLP)</h4>
+                        <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Gurugram, India</span>
+                    </div>
+                    <div class="experience-details card">
+                        <h3 class="exp-role">Senior Associate</h3>
+                        <ul class="exp-bullets">
+                            <li>Improved detection coverage across 20+ Azure attack scenarios using KQL-based threat hunting.</li>
+                            <li>Reduced investigation time by ~30% via behavioral detections in Microsoft Sentinel.</li>
+                            <li>Identified detection gaps through adversary simulation mapped to MITRE ATT&CK.</li>
+                            <li>Enhanced detection quality by integrating attacker TTP research into rules.</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-date">Nov 2023 - Jul 2024</div>
-                    <div class="timeline-content card">
-                        <h3>Senior Security Analyst</h3>
-                        <h4>Megashop Retail Private Limited, Remote</h4>
-                        <ul>
-                            <li>Performed proactive threat hunting in hybrid cloud environments leveraging Sentinel and Defender telemetry.</li>
-                            <li>Created <strong>custom detection rules</strong> and automated incident response workflows, reducing mean response time by 35%.</li>
-                            <li>Conducted in-depth incident investigations and contributed to threat intelligence enrichment.</li>
-                            <li>Partnered with cross-functional teams to refine detection coverage and improve threat response maturity.</li>
+                <!-- Experience Item 2 -->
+                <div class="experience-block reveal-on-scroll">
+                    <div class="experience-meta">
+                        <span class="exp-date">Aug 2024 – Apr 2026</span>
+                        <h4 class="exp-company"><i class="fas fa-building"></i> Attackfence Techlabs Pvt. Ltd.</h4>
+                        <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Gurugram, India</span>
+                    </div>
+                    <div class="experience-details card">
+                        <h3 class="exp-role">Security Researcher</h3>
+                        <ul class="exp-bullets">
+                            <li>Developed 50+ Sigma detections improving endpoint and identity visibility.</li>
+                            <li>Reduced false positives by ~25% through detection tuning and behavior analysis.</li>
+                            <li>Validated detections via adversary emulation aligned with MITRE ATT&CK.</li>
+                            <li>Automated enrichment workflows, reducing manual effort significantly.</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-date">Aug 2023 - Oct 2023</div>
-                    <div class="timeline-content card">
-                        <h3>Cybersecurity Intern</h3>
-                        <h4>Gujarat Mineral Development Corporation, Ahmedabad</h4>
-                        <ul>
-                            <li>Assisted with malware triage and reverse engineering to support proactive threat detection.</li>
-                            <li>Developed and tested <strong>YARA and Sigma rules</strong> for detecting known and emerging threats.</li>
-                            <li>Automated analysis processes to accelerate triage workflows.</li>
+                <!-- Experience Item 3 -->
+                <div class="experience-block reveal-on-scroll">
+                    <div class="experience-meta">
+                        <span class="exp-date">Nov 2023 – Jul 2024</span>
+                        <h4 class="exp-company"><i class="fas fa-building"></i> Megashop Retail Pvt. Ltd.</h4>
+                        <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Remote, India</span>
+                    </div>
+                    <div class="experience-details card">
+                        <h3 class="exp-role">Senior Security Analyst</h3>
+                        <ul class="exp-bullets">
+                            <li>Built 30+ SIEM detections for lateral movement, persistence, and credential abuse.</li>
+                            <li>Reduced alert noise by ~20% through tuning and rule optimization.</li>
+                            <li>Analyzed authentication and SaaS access patterns across cloud environments.</li>
+                            <li>Improved detection coverage across enterprise workloads.</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-date">Jun 2021 - Jul 2023</div>
-                    <div class="timeline-content card">
-                        <h3>Security Analyst</h3>
-                        <h4>Megashop Retail Private Limited, Remote</h4>
-                        <ul>
-                            <li>Led continuous endpoint threat hunting and real-time EDR monitoring using Defender and CrowdStrike.</li>
-                            <li>Conducted detailed investigations of alerts to identify lateral movement and persistence mechanisms.</li>
-                            <li>Automated repetitive analysis tasks in Python, improving analyst efficiency by 25%.</li>
-                            <li>Reverse-engineered malware samples to extract IOCs and improve detection signatures.</li>
+                <!-- Experience Item 4 -->
+                <div class="experience-block reveal-on-scroll">
+                    <div class="experience-meta">
+                        <span class="exp-date">Aug 2023 – Oct 2023</span>
+                        <h4 class="exp-company"><i class="fas fa-building"></i> Gujarat Mineral Development Corp.</h4>
+                        <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Ahmedabad, India</span>
+                    </div>
+                    <div class="experience-details card">
+                        <h3 class="exp-role">Cybersecurity Intern</h3>
+                        <ul class="exp-bullets">
+                            <li>Authored 15+ Sigma rules for Windows threat detection.</li>
+                            <li>Developed Suricata signatures improving network anomaly detection.</li>
+                            <li>Tested detection coverage using simulated attack techniques.</li>
+                            <li>Extracted behavioral indicators from malware samples.</li>
                         </ul>
                     </div>
                 </div>
 
+                <!-- Experience Item 5 -->
+                <div class="experience-block reveal-on-scroll">
+                    <div class="experience-meta">
+                        <span class="exp-date">Jun 2021 – Jul 2023</span>
+                        <h4 class="exp-company"><i class="fas fa-building"></i> Megashop Retail Pvt. Ltd.</h4>
+                        <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Remote, India</span>
+                    </div>
+                    <div class="experience-details card">
+                        <h3 class="exp-role">Security Analyst</h3>
+                        <ul class="exp-bullets">
+                            <li>Investigated 100+ alerts/month and improved detection logic.</li>
+                            <li>Translated attack chains into actionable detection patterns.</li>
+                            <li>Developed Python utilities reducing log analysis time.</li>
+                            <li>Supported detection tuning lifecycle and alert quality improvements.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Skills Console (Interactive Category Tab Dashboard) -->
         <section id="skills" class="container section">
-            <h2 class="section-title"><span class="hash">#</span> Technical_Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category card">
-                    <h3>Threat Hunting</h3>
-                    <div class="tags">
-                        <span>Microsoft Sentinel</span>
-                        <span>Microsoft Defender XDR</span>
-                        <span>CrowdStrike Falcon</span>
-                        <span>SIEM</span>
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tag">03 / CAPABILITIES</span>
+                <h2 class="section-title">Technical Expertise</h2>
+            </div>
+
+            <div class="skills-console card reveal-on-scroll">
+                <div class="console-sidebar">
+                    <button class="console-tab active" data-category="detection">
+                        <i class="fas fa-shield-alt"></i> Detection & Hunting
+                    </button>
+                    <button class="console-tab" data-category="telemetry">
+                        <i class="fas fa-database"></i> Telemetry & Logs
+                    </button>
+                    <button class="console-tab" data-category="tools">
+                        <i class="fas fa-tools"></i> Platforms & Tools
+                    </button>
+                    <button class="console-tab" data-category="code">
+                        <i class="fas fa-code"></i> Code & Automation
+                    </button>
+                    <button class="console-tab" data-category="malware">
+                        <i class="fas fa-bug"></i> Offensive & Analysis
+                    </button>
+                </div>
+                <div class="console-content">
+                    <!-- Tab Panel: Detection -->
+                    <div class="console-panel active" id="panel-detection">
+                        <h3>Detection Engineering & Adversary Simulation</h3>
+                        <p class="panel-desc">Designing, testing, and implementing rules that map attacker behaviors directly to structured logic.</p>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Detection Engineering</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 95%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Threat Hunting (KQL)</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 90%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Adversary Simulation</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 88%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">MITRE ATT&CK Mapping</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 92%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Panel: Telemetry -->
+                    <div class="console-panel" id="panel-telemetry">
+                        <h3>Telemetry, Formats & Log Sources</h3>
+                        <p class="panel-desc">Ingesting, parsing, and writing signatures across high-fidelity operating system and network signals.</p>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Sigma Rules</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 95%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Windows Event Logs / Sysmon</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 92%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Suricata Signatures & Netflow</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 80%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Linux Logs / Auditd</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 85%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Panel: Tools -->
+                    <div class="console-panel" id="panel-tools">
+                        <h3>Platforms & SIEM Solutions</h3>
+                        <p class="panel-desc">Managing ingestion channels, security analytics, and incident orchestration systems.</p>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Microsoft Sentinel</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 92%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Wazuh EDR/SIEM</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 85%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Defender XDR / CrowdStrike</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 90%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Panel: Code -->
+                    <div class="console-panel" id="panel-code">
+                        <h3>Automation & Scripting</h3>
+                        <p class="panel-desc">Building modular parsing pipelines, automated response playbooks, and threat intel scrapers.</p>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 88%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">PowerShell</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 80%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">YAML / Rule Automation</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 95%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Panel: Malware -->
+                    <div class="console-panel" id="panel-malware">
+                        <h3>Reverse Engineering & Malware Triage</h3>
+                        <p class="panel-desc">Deconstructing binary behaviors to extract high-fidelity IOCs and detection indicators.</p>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Malware Analysis (Static & Dynamic)</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 85%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Ghidra & IDA Pro</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 75%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">x64dbg / Cuckoo Sandbox</span>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: 80%"></div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-category card">
-                    <h3>Cloud Security</h3>
-                    <div class="tags">
-                        <span>Azure Security Center</span>
-                        <span>Azure AD</span>
-                        <span>Microsoft 365 Defender</span>
+            </div>
+        </section>
+
+        <!-- Projects Section (Premium Bento Product Grid) -->
+        <section id="projects" class="container section">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tag">04 / CREATIVE WORKS</span>
+                <h2 class="section-title">Pinned Projects</h2>
+            </div>
+
+            <div class="projects-grid-modern">
+                <!-- Project 1: Raven (Large Showcase Card) -->
+                <div class="project-showcase reveal-on-scroll">
+                    <div class="project-showcase-info">
+                        <div class="proj-badge"><i class="fas fa-star"></i> Pinned Project</div>
+                        <h3>Raven: Autonomous Bug Bounty AI Agent</h3>
+                        <p class="proj-desc">
+                            An AI-powered agent engineered to perform autonomous offensive operations, validate complex logic vulnerabilities, and self-improve through feedback loops.
+                        </p>
+                        <ul class="proj-features">
+                            <li><i class="fas fa-check-circle"></i> Reported 5+ bug bounty vulnerabilities via AI-assisted workflows.</li>
+                            <li><i class="fas fa-check-circle"></i> Safely bypassed Gemini guardrails in testing environments to prove vulnerability exploitability.</li>
+                            <li><i class="fas fa-check-circle"></i> Built self-improving workflows that dynamically learn and acquire modules.</li>
+                            <li><i class="fas fa-check-circle"></i> Integrated 10+ offensive security modules directly into Gemini CLI for continuous checks.</li>
+                        </ul>
+                        <div class="proj-tech">
+                            <span>Python</span>
+                            <span>LLM Orchestration</span>
+                            <span>AI Red Teaming</span>
+                            <span>Gemini API</span>
+                        </div>
+                    </div>
+                    <div class="project-showcase-visual">
+                        <div class="visual-terminal">
+                            <div class="terminal-bar">
+                                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                                <span>raven_agent_v1.0.3</span>
+                            </div>
+                            <div class="terminal-body small-text">
+                                <div class="term-line"><span class="t-cyan">$</span> ./raven_daemon.py --target bugbounty.corp --scan</div>
+                                <div class="term-line t-yellow">[*] Scanning subdomains... Found 14 active hosts</div>
+                                <div class="term-line t-yellow">[*] Testing endpoint /api/v2/user/invoice</div>
+                                <div class="term-line t-purple">[!] Detected potential IDOR vulnerability</div>
+                                <div class="term-line"><span class="t-cyan">$</span> ./raven_daemon.py --exploit IDOR --bypass-filters</div>
+                                <div class="term-line t-cyan">[*] Generating payload dynamically via Gemini...</div>
+                                <div class="term-line t-red">[!] Exploit Successful: Captured user session token (admin_lvl)</div>
+                                <div class="term-line t-green">[✔] Automated report generated & verified. Severity: High (8.8)</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-category card">
-                    <h3>Query & Scripting</h3>
-                    <div class="tags">
-                        <span>KQL</span>
-                        <span>Python</span>
+
+                <!-- Project 2: Adversary Simulation Lab (Grid Card) -->
+                <div class="project-small-card reveal-on-scroll delay-1">
+                    <div class="project-card-header">
+                        <div class="proj-badge">Laboratory</div>
+                        <i class="fas fa-network-wired card-icon"></i>
+                    </div>
+                    <h3>Adversary Simulation Lab</h3>
+                    <p>
+                        A dedicated environment configured to emulate complex advanced persistent threat (APT) attack lifecycles.
+                    </p>
+                    <ul class="proj-features-small">
+                        <li>Simulated 10+ techniques including LSASS credential dumping, Remote Service creation, and process hollowing.</li>
+                        <li>Validated and refined endpoint detection logs across Windows Event IDs and Sysmon telemetry.</li>
+                        <li>Calculated detection ratios and mapped coverage scores directly to the corporate MITRE ATT&CK dashboard.</li>
+                    </ul>
+                    <div class="proj-tech">
+                        <span>Sysmon</span>
+                        <span>Windows Server</span>
+                        <span>ATT&CK</span>
                         <span>PowerShell</span>
                     </div>
                 </div>
-                <div class="skill-category card">
-                    <h3>Detection Engineering</h3>
-                    <div class="tags">
-                        <span>Custom Rule Creation</span>
-                        <span>Sigma</span>
-                        <span>YARA</span>
-                        <span>MITRE ATT&CK</span>
+            </div>
+        </section>
+
+        <!-- Achievements Section (Apple Grid) -->
+        <section id="achievements" class="container section">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tag">05 / ACHIEVEMENTS</span>
+                <h2 class="section-title">Milestones & Recognition</h2>
+            </div>
+            
+            <div class="achievements-grid">
+                <!-- Achievement 1 -->
+                <div class="achievement-card card reveal-on-scroll">
+                    <div class="achievement-icon-wrapper cyan-glow">
+                        <i class="fas fa-trophy"></i>
                     </div>
+                    <h3>NCIIPC CTF AIR 8</h3>
+                    <p class="achievement-subtitle">All India Rank 8 | 5,000+ Competitors</p>
+                    <p class="achievement-desc">
+                        Demonstrated exceptional speed and deep understanding of network forensics, cryptography, reverse engineering, and infrastructure exploitation.
+                    </p>
                 </div>
-                <div class="skill-category card">
-                    <h3>Malware Analysis</h3>
-                    <div class="tags">
-                        <span>IDA Pro</span>
-                        <span>Ghidra</span>
-                        <span>x64dbg</span>
-                        <span>Cuckoo Sandbox</span>
+
+                <!-- Achievement 2 -->
+                <div class="achievement-card card reveal-on-scroll delay-1">
+                    <div class="achievement-icon-wrapper purple-glow">
+                        <i class="fas fa-user-ninja"></i>
                     </div>
-                </div>
-                <div class="skill-category card">
-                    <h3>Forensics & IR</h3>
-                    <div class="tags">
-                        <span>Endpoint Forensics</span>
-                        <span>Network Forensics</span>
-                        <span>Cyber Kill Chain</span>
-                        <span>Threat Intelligence</span>
-                    </div>
+                    <h3>Trend Micro Hall of Fame</h3>
+                    <p class="achievement-subtitle">EDR Bypass Vulnerability</p>
+                    <p class="achievement-desc">
+                        Honored in the official Hall of Fame for identifying a critical security vulnerability that allowed standard non-admin users to disable the Trend Micro EDR solution completely.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="container section">
-            <h2 class="section-title"><span class="hash">#</span> Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card card">
-                    <h3>Threat Hunting Automation Framework</h3>
-                    <p class="tech-stack">Python, Microsoft Sentinel</p>
-                    <ul>
-                        <li>Built a Python framework integrated with Microsoft Sentinel for automated alert enrichment and hunting.</li>
-                        <li>Created reusable queries to detect suspicious patterns across telemetry.</li>
-                    </ul>
-                </div>
-                <div class="project-card card">
-                    <h3>EDR Detection Rule Development</h3>
-                    <p class="tech-stack">Python, MITRE ATT&CK</p>
-                    <ul>
-                        <li>Developed detection content mapped to MITRE ATT&CK from malware behavioral analysis.</li>
-                        <li>Automated deployment pipelines for custom Defender and CrowdStrike detection rules.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
+        <!-- Education Section -->
         <section id="education" class="container section">
-            <h2 class="section-title"><span class="hash">#</span> Education_&_Certs</h2>
-            <div class="grid-2-col">
-                <div class="card">
-                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-                    <div class="edu-item">
-                        <h4>M.Tech in Cyber Security</h4>
-                        <p>National Forensic Sciences University, Gandhinagar</p>
-                        <span class="date">2022 - 2024</span>
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tag">06 / ACADEMICS</span>
+                <h2 class="section-title">Education</h2>
+            </div>
+
+            <div class="education-grid">
+                <div class="education-card card reveal-on-scroll">
+                    <div class="edu-header">
+                        <h3>M.Tech in Cyber Security</h3>
+                        <span class="edu-date">2022 – 2024</span>
                     </div>
-                    <div class="edu-item">
-                        <h4>B.Tech in Information Technology</h4>
-                        <p>Inderprastha Engineering College, Ghaziabad</p>
-                        <span class="date">2018 - 2022</span>
-                    </div>
+                    <p class="edu-school">National Forensic Sciences University</p>
+                    <p class="edu-location"><i class="fas fa-map-marker-alt"></i> Gandhinagar, Gujarat</p>
                 </div>
-                <div class="card">
-                    <h3><i class="fas fa-certificate"></i> Certifications</h3>
-                    <ul class="cert-list">
-                        <li>
-                            <strong>Offensive Security Certified Professional (OSCP)</strong>
-                            <p>Pursuing, Expected 2025</p>
-                        </li>
-                        <li>
-                            <strong>Microsoft Certified: Security Operations Analyst (SC-200)</strong>
-                            <p>In Progress</p>
-                        </li>
-                        <li>
-                            <strong>NCIIPC CTF Rank 8</strong>
-                            <p>Achieved All India Rank 8 among 5,000+ participants</p>
-                        </li>
-                    </ul>
+
+                <div class="education-card card reveal-on-scroll delay-1">
+                    <div class="edu-header">
+                        <h3>B.Tech in Information Technology</h3>
+                        <span class="edu-date">2018 – 2022</span>
+                    </div>
+                    <p class="edu-school">Inderprastha Engineering College</p>
+                    <p class="edu-location"><i class="fas fa-map-marker-alt"></i> Ghaziabad, Uttar Pradesh</p>
                 </div>
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact" class="container section">
-            <h2 class="section-title"><span class="hash">#</span> Initialize_Connection</h2>
-            <div class="contact-card card">
-                <div class="contact-links">
-                    <a href="mailto:ishan.patel1998@gmail.com" class="contact-link">
+            <div class="contact-wrapper card reveal-on-scroll">
+                <div class="badge">INITIALIZE_CONNECTION</div>
+                <h2>Connect with Ishan Patel</h2>
+                <p>Feel free to reach out for threat hunting, detection engineering collaborations, or inquiries.</p>
+                
+                <div class="contact-channels">
+                    <a href="mailto:ishan.patel1998@gmail.com" class="channel-btn">
                         <i class="fas fa-envelope"></i>
-                        <span>ishan.patel1998@gmail.com</span>
+                        <span class="channel-text">ishan.patel1998@gmail.com</span>
                     </a>
-                    <a href="https://linkedin.com/in/ishan3299" target="_blank" class="contact-link">
+                    <a href="https://linkedin.com/in/ishan3299" target="_blank" rel="noopener" class="channel-btn">
                         <i class="fab fa-linkedin"></i>
-                        <span>linkedin.com/in/ishan3299</span>
+                        <span class="channel-text">linkedin.com/in/ishan3299</span>
                     </a>
-                    <a href="https://github.com/ishan3299" target="_blank" class="contact-link">
+                    <a href="https://github.com/ishan3299" target="_blank" rel="noopener" class="channel-btn">
                         <i class="fab fa-github"></i>
-                        <span>github.com/ishan3299</span>
+                        <span class="channel-text">github.com/ishan3299</span>
                     </a>
-                    <div class="contact-link">
+                    <div class="channel-btn plain">
                         <i class="fas fa-phone"></i>
-                        <span>+91-7309789192</span>
+                        <span class="channel-text">+91-7309789192</span>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Ishan Patel. System Secure.</p>
+        <div class="container footer-content">
+            <p>&copy; 2026 Ishan Patel. Built with premium motion layouts. System Secure.</p>
+            <p class="footer-status">[System: Active // Threat Hunting Operational]</p>
         </div>
     </footer>
 
